@@ -1,0 +1,11 @@
+// SETUP
+@use "setup/typography";
+@use "setup/helpers";
+@use "setup/reset";
+@use "setup/layout";
+
+// PAGES
+@use "pages/HomePage.scss"; 
+
+// COMPONENTS
+/* @use "components/navbar"; */

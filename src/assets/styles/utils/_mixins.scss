@@ -1,0 +1,60 @@
+// Responsive Mixin with min-width as default, and max-width when necessary
+$breakpoints: (
+    'xs': 0,
+    'sm': 576px,
+    'md': 768px,
+    'lg': 992px,
+    'xl': 1200px
+);
+
+@mixin media($size, $type: min-width) {
+    @if map-has-key($breakpoints, $size) {
+        $breakpoint: map-get($breakpoints, $size);
+
+        @if $type == min-width {
+            @media (min-width: $breakpoint) {
+                @content;
+            }
+        }
+
+        @else if $type == max-width {
+            @media (max-width: $breakpoint) {
+                @content;
+            }
+        }
+
+        @else {
+            @warn "Invalid type '#{$type}' for media query. Use 'min-width' or 'max-width'.";
+        }
+    }
+
+    @else {
+        @warn "No such breakpoint '#{$size}' exists in the breakpoints map.";
+    }
+}
+
+// Custom media query mixin
+@mixin custom-media($type, $value) {
+    @if $type == min-width {
+        @media (min-width: $value) {
+            @content;
+        }
+    }
+
+    @else if $type == max-width {
+        @media (max-width: $value) {
+            @content;
+        }
+    }
+}
+
+// Aspect ratio
+@mixin aspect-ratio($width: 16, $height: 9) {
+    position: relative;
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+}
+
+@mixin aspect-ratio-square() {
+    @include aspect-ratio(1, 1);
+}
